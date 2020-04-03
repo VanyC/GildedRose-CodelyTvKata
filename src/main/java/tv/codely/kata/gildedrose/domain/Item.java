@@ -36,23 +36,9 @@ public class Item {
             case SULFURAS:
                 break;
             case BACKSTAGE_PASSES:
-                if (isNotHighestQuality(this)) {
-                    this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
+                increaseBackstagePassesQuality();
 
-                    if (isConcertApproaching(this)) {
-                        if (isNotHighestQuality(this)) {
-                            this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
-                        }
-                    }
-
-                    if (isConcertAlreadyHere(this)) {
-                        if (isNotHighestQuality(this)) {
-                            this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
-                        }
-                    }
-                }
-
-                this.sellIn = decreaser.apply(this.sellIn, SELLIN_QUANTITY_TO_DECREASE);
+                decreaseSellIn();
 
                 if (isSellByDateHasPassed(this)) {
                     this.quality = decreaser.apply(this.quality, this.quality);
@@ -60,33 +46,55 @@ public class Item {
 
                 break;
             case AGED_BRIE:
-                if (isNotHighestQuality(this)) {
-                    this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
-                }
+                increaseQuality();
 
-                this.sellIn = decreaser.apply(this.sellIn, SELLIN_QUANTITY_TO_DECREASE);
+                decreaseSellIn();
 
                 if (isSellByDateHasPassed(this)) {
-                    if (isNotHighestQuality(this)) {
-                        this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
-                    }
+                    increaseQuality();
                 }
 
                 break;
             default:
-                if (isNotWorstQuality(this)) {
-                    this.quality = decreaser.apply(this.quality, QUALITY_QUANTITY_TO_DECREASE);
-                }
+                decreaseQuality();
 
-                this.sellIn = decreaser.apply(this.sellIn, SELLIN_QUANTITY_TO_DECREASE);
+                decreaseSellIn();
 
                 if (isSellByDateHasPassed(this)) {
-                    if (isNotWorstQuality(this)) {
-                        this.quality = decreaser.apply(this.quality, QUALITY_QUANTITY_TO_DECREASE);
-                    }
+                    decreaseQuality();
                 }
 
                 break;
+        }
+    }
+
+    private void increaseBackstagePassesQuality() {
+        if (isNotHighestQuality(this)) {
+            this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
+
+            if (isConcertApproaching(this)) {
+                increaseQuality();
+            }
+
+            if (isConcertAlreadyHere(this)) {
+                increaseQuality();
+            }
+        }
+    }
+
+    private void decreaseSellIn() {
+        this.sellIn = decreaser.apply(this.sellIn, SELLIN_QUANTITY_TO_DECREASE);
+    }
+
+    private void decreaseQuality() {
+        if (isNotWorstQuality(this)) {
+            this.quality = decreaser.apply(this.quality, QUALITY_QUANTITY_TO_DECREASE);
+        }
+    }
+
+    private void increaseQuality() {
+        if (isNotHighestQuality(this)) {
+            this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
         }
     }
 
