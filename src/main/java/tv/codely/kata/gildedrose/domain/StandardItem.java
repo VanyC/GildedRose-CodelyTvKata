@@ -10,9 +10,9 @@ public class StandardItem extends Item {
     public void update() {
         quality = quality.decrease();
 
-        decreaseSellIn();
+        sellIn = sellIn.decrease();
 
-        if (isSellByDateHasPassed(this)) {
+        if (sellIn.isSellByDateHasPassed()) {
             quality = quality.decrease();
         }
     }

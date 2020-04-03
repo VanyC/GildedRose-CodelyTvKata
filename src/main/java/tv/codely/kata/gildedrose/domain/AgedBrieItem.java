@@ -10,9 +10,9 @@ public class AgedBrieItem extends Item {
     public void update() {
         quality = quality.increase();
 
-        decreaseSellIn();
+        sellIn = sellIn.decrease();
 
-        if (isSellByDateHasPassed(this)) {
+        if (sellIn.isSellByDateHasPassed()) {
             quality = quality.increase();
         }
     }

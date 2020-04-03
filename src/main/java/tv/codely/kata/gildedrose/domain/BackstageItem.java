@@ -10,10 +10,10 @@ public class BackstageItem extends Item {
     public void update() {
         increaseBackstagePassesQuality();
 
-        decreaseSellIn();
+        sellIn = sellIn.decrease();
 
-        if (isSellByDateHasPassed(this)) {
-            this.quality = new ItemQuality(decreaser.apply(this.quality.getQuality(), this.quality.getQuality()));
+        if (sellIn.isSellByDateHasPassed()) {
+            quality = new ItemQuality(decreaser.apply(quality.getQuality(), quality.getQuality()));
         }
     }
 

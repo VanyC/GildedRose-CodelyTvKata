@@ -2,6 +2,9 @@ package tv.codely.kata.gildedrose.domain;
 
 public class ItemSellIn {
 
+    public static final int MIN_SELLIN_DAYS = 0;
+    public static final int SELLIN_QUANTITY_TO_DECREASE = 1;
+
     private Integer sellIn;
 
     public ItemSellIn(Integer sellIn) {
@@ -10,6 +13,17 @@ public class ItemSellIn {
 
     public Integer getSellIn() {
         return sellIn;
+    }
+
+    public ItemSellIn decrease() {
+        if (!isSellByDateHasPassed()) {
+            return new ItemSellIn(sellIn - SELLIN_QUANTITY_TO_DECREASE);
+        }
+        return this;
+    }
+
+    public boolean isSellByDateHasPassed() {
+        return sellIn < MIN_SELLIN_DAYS;
     }
 
     @Override

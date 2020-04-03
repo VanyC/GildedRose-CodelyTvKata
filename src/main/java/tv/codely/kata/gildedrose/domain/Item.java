@@ -7,9 +7,6 @@ abstract public class Item {
     public static final int DAYS_TO_CONCERT_IS_APPROACHING = 11;
     public static final int DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT = 6;
 
-    public static final int MIN_SELLIN_DAYS = 0;
-    public static final int SELLIN_QUANTITY_TO_DECREASE = 1;
-
     public ItemName name;
     public ItemSellIn sellIn;
     public ItemQuality quality;
@@ -21,14 +18,6 @@ abstract public class Item {
     }
 
     abstract public void update();
-
-    protected void decreaseSellIn() {
-        this.sellIn = new ItemSellIn(decreaser.apply(this.sellIn.getSellIn(), SELLIN_QUANTITY_TO_DECREASE));
-    }
-
-    protected boolean isSellByDateHasPassed(Item item) {
-        return item.sellIn.getSellIn() < MIN_SELLIN_DAYS;
-    }
 
 
     protected final BinaryOperator<Integer> decreaser = (itemToDecrease, quantityToDecrease)
