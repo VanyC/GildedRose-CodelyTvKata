@@ -2,7 +2,7 @@ package tv.codely.kata.gildedrose.domain;
 
 public class BackstageItem extends Item {
 
-    public BackstageItem(String name, int sellIn, int quality) {
+    public BackstageItem(ItemName name, ItemSellIn sellIn, ItemQuality quality) {
         super(name, sellIn, quality);
     }
 
@@ -13,13 +13,13 @@ public class BackstageItem extends Item {
         decreaseSellIn();
 
         if (isSellByDateHasPassed(this)) {
-            this.quality = decreaser.apply(this.quality, this.quality);
+            this.quality = new ItemQuality(decreaser.apply(this.quality.getQuality(), this.quality.getQuality()));
         }
     }
 
     private void increaseBackstagePassesQuality() {
         if (isNotHighestQuality(this)) {
-            this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
+            this.quality = new ItemQuality(increaser.apply(this.quality.getQuality(), QUALITY_QUANTITY_TO_INCREASE));
 
             if (isConcertApproaching(this)) {
                 increaseQuality();
@@ -32,10 +32,10 @@ public class BackstageItem extends Item {
     }
 
     private boolean isConcertAlreadyHere(Item item) {
-        return item.sellIn < DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT;
+        return item.sellIn.getSellIn() < DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT;
     }
 
     private boolean isConcertApproaching(Item item) {
-        return item.sellIn < DAYS_TO_CONCERT_IS_APPROACHING;
+        return item.sellIn.getSellIn() < DAYS_TO_CONCERT_IS_APPROACHING;
     }
 }

@@ -2,7 +2,7 @@ package tv.codely.kata.gildedrose.domain;
 
 public class AgedBrieItem extends Item {
 
-    public AgedBrieItem(String name, int sellIn, int quality) {
+    public AgedBrieItem(ItemName name, ItemSellIn sellIn, ItemQuality quality)  {
         super(name, sellIn, quality);
     }
 

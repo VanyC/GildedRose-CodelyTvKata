@@ -2,7 +2,7 @@ package tv.codely.kata.gildedrose.domain;
 
 public class SulfurasItem extends Item {
 
-    public SulfurasItem(String name, int sellIn, int quality) {
+    public SulfurasItem(ItemName name, ItemSellIn sellIn, ItemQuality quality)  {
         super(name, sellIn, quality);
     }
 
