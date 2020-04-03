@@ -2,10 +2,9 @@ package tv.codely.kata.gildedrose.domain;
 
 public class ItemQuality {
 
-    public static final int MAX_QUALITY_VALUE = 50;
-    public static final int MIN_QUALITY_VALUE = 0;
-    public static final int QUALITY_QUANTITY_TO_DECREASE = 1;
-    public static final int QUALITY_QUANTITY_TO_INCREASE = 1;
+    private static final int MAX_VALUE = 50;
+    private static final int MIN_VALUE = 0;
+    private static final int QUANTITY_TO_MODIFY = 1;
 
     private Integer quality;
 
@@ -17,28 +16,31 @@ public class ItemQuality {
         return quality;
     }
 
+    public ItemQuality decrease() {
+        if (isNotWorstQuality()) {
+            return new ItemQuality(quality - QUANTITY_TO_MODIFY);
+        }
+        return this;
+    }
+
+    public ItemQuality increase() {
+        if (isNotHighestQuality()) {
+            return new ItemQuality(quality + QUANTITY_TO_MODIFY);
+        }
+        return this;
+    }
+
+    public ItemQuality reset() {
+        return new ItemQuality(MIN_VALUE);
+    }
+
     private boolean isNotHighestQuality() {
-        return quality < MAX_QUALITY_VALUE;
+        return quality < MAX_VALUE;
     }
 
     private boolean isNotWorstQuality() {
-        return quality > MIN_QUALITY_VALUE;
+        return quality > MIN_VALUE;
     }
-
-    protected ItemQuality decrease() {
-        if (isNotWorstQuality()) {
-            return new ItemQuality(quality - QUALITY_QUANTITY_TO_DECREASE);
-        }
-        return this;
-    }
-
-    protected ItemQuality increase() {
-        if (isNotHighestQuality()) {
-            return new ItemQuality(quality + QUALITY_QUANTITY_TO_INCREASE);
-        }
-        return this;
-    }
-
 
     @Override
     public boolean equals(Object o) {

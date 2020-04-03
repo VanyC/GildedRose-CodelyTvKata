@@ -1,11 +1,6 @@
 package tv.codely.kata.gildedrose.domain;
 
-import java.util.function.BinaryOperator;
-
 abstract public class Item {
-
-    public static final int DAYS_TO_CONCERT_IS_APPROACHING = 11;
-    public static final int DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT = 6;
 
     public ItemName name;
     public ItemSellIn sellIn;
@@ -18,13 +13,6 @@ abstract public class Item {
     }
 
     abstract public void update();
-
-
-    protected final BinaryOperator<Integer> decreaser = (itemToDecrease, quantityToDecrease)
-            -> itemToDecrease - quantityToDecrease;
-
-    protected final BinaryOperator<Integer> increaser = (itemToIncrease, quantityToIncrease)
-            -> itemToIncrease + quantityToIncrease;
 
     @Override
     public String toString() {
@@ -40,9 +28,7 @@ abstract public class Item {
 
         if (name != null ? !name.equals(item.name) : item.name != null) return false;
         if (sellIn != null ? !sellIn.equals(item.sellIn) : item.sellIn != null) return false;
-        if (quality != null ? !quality.equals(item.quality) : item.quality != null) return false;
-        if (decreaser != null ? !decreaser.equals(item.decreaser) : item.decreaser != null) return false;
-        return increaser != null ? increaser.equals(item.increaser) : item.increaser == null;
+        return quality != null ? quality.equals(item.quality) : item.quality == null;
     }
 
     @Override
@@ -50,8 +36,6 @@ abstract public class Item {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (sellIn != null ? sellIn.hashCode() : 0);
         result = 31 * result + (quality != null ? quality.hashCode() : 0);
-        result = 31 * result + (decreaser != null ? decreaser.hashCode() : 0);
-        result = 31 * result + (increaser != null ? increaser.hashCode() : 0);
         return result;
     }
 }
