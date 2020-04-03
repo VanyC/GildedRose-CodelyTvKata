@@ -1,7 +1,20 @@
 # Gradle
 .gradle
 build/
+.idea/**/libraries
+.idea/**/gradle.xml
+misc.xml
+modules.xml
+vcs.xml
+
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+.idea/**
+*.iml
 
 # Ignore Gradle GUI config
 gradle-app.setting
 
+# Java
+*.class
