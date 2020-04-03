@@ -1,6 +1,8 @@
 package tv.codely.kata.gildedrose;
 
 import org.junit.jupiter.api.Test;
+import tv.codely.kata.gildedrose.application.GildedRose;
+import tv.codely.kata.gildedrose.domain.Item;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,6 @@ public class GildedRoseShould {
     public void testThatSellInValueIsDecreased() {
         Item whateverItem = new Item("whatever", 10, 0);
 
-        //GildedRose gildedRose = new GildedRose(arrayWith(whateverItem));
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(whateverItem));
 

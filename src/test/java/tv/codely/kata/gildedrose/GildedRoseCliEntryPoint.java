@@ -1,5 +1,8 @@
 package tv.codely.kata.gildedrose;
 
+import tv.codely.kata.gildedrose.application.GildedRose;
+import tv.codely.kata.gildedrose.domain.Item;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,7 +24,6 @@ public class GildedRoseCliEntryPoint {
                 new Item("Conjured Mana Cake", 3, 6)
         ).collect(Collectors.toList());
 
-        //GildedRose app = new GildedRose(items);
         GildedRose app = new GildedRose();
 
         int days = 2;

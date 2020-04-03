@@ -1,4 +1,4 @@
-package tv.codely.kata.gildedrose;
+package tv.codely.kata.gildedrose.domain;
 
 import java.util.function.BinaryOperator;
 
