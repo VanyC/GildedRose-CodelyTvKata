@@ -4,11 +4,6 @@ import java.util.function.BinaryOperator;
 
 abstract public class Item {
 
-    public static final int MAX_QUALITY_VALUE = 50;
-    public static final int MIN_QUALITY_VALUE = 0;
-    public static final int QUALITY_QUANTITY_TO_DECREASE = 1;
-    public static final int QUALITY_QUANTITY_TO_INCREASE = 1;
-
     public static final int DAYS_TO_CONCERT_IS_APPROACHING = 11;
     public static final int DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT = 6;
 
@@ -31,29 +26,10 @@ abstract public class Item {
         this.sellIn = new ItemSellIn(decreaser.apply(this.sellIn.getSellIn(), SELLIN_QUANTITY_TO_DECREASE));
     }
 
-    protected void decreaseQuality() {
-        if (isNotWorstQuality(this)) {
-            this.quality = new ItemQuality(decreaser.apply(this.quality.getQuality(), QUALITY_QUANTITY_TO_DECREASE));
-        }
-    }
-
-    protected void increaseQuality() {
-        if (isNotHighestQuality(this)) {
-            this.quality = new ItemQuality(increaser.apply(this.quality.getQuality(), QUALITY_QUANTITY_TO_INCREASE));
-        }
-    }
-
-    protected boolean isNotWorstQuality(Item item) {
-        return item.quality.getQuality() > MIN_QUALITY_VALUE;
-    }
-
     protected boolean isSellByDateHasPassed(Item item) {
         return item.sellIn.getSellIn() < MIN_SELLIN_DAYS;
     }
 
-    protected boolean isNotHighestQuality(Item item) {
-        return item.quality.getQuality() < MAX_QUALITY_VALUE;
-    }
 
     protected final BinaryOperator<Integer> decreaser = (itemToDecrease, quantityToDecrease)
             -> itemToDecrease - quantityToDecrease;

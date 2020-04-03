@@ -8,12 +8,12 @@ public class StandardItem extends Item {
 
     @Override
     public void update() {
-        decreaseQuality();
+        quality = quality.decrease();
 
         decreaseSellIn();
 
         if (isSellByDateHasPassed(this)) {
-            decreaseQuality();
+            quality = quality.decrease();
         }
     }
 }

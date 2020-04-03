@@ -8,12 +8,12 @@ public class AgedBrieItem extends Item {
 
     @Override
     public void update() {
-        increaseQuality();
+        quality = quality.increase();
 
         decreaseSellIn();
 
         if (isSellByDateHasPassed(this)) {
-            increaseQuality();
+            quality = quality.increase();
         }
     }
 }

@@ -18,18 +18,17 @@ public class BackstageItem extends Item {
     }
 
     private void increaseBackstagePassesQuality() {
-        if (isNotHighestQuality(this)) {
-            this.quality = new ItemQuality(increaser.apply(this.quality.getQuality(), QUALITY_QUANTITY_TO_INCREASE));
+        quality = quality.increase();
 
-            if (isConcertApproaching(this)) {
-                increaseQuality();
-            }
+        if (isConcertApproaching(this)) {
+            quality = quality.increase();
+        }
 
-            if (isConcertAlreadyHere(this)) {
-                increaseQuality();
-            }
+        if (isConcertAlreadyHere(this)) {
+            quality = quality.increase();
         }
     }
+
 
     private boolean isConcertAlreadyHere(Item item) {
         return item.sellIn.getSellIn() < DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT;

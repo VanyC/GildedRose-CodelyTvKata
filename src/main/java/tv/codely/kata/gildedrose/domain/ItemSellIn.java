@@ -26,4 +26,11 @@ public class ItemSellIn {
     public int hashCode() {
         return sellIn != null ? sellIn.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return "ItemSellIn{" +
+                "sellIn=" + sellIn +
+                '}';
+    }
 }
