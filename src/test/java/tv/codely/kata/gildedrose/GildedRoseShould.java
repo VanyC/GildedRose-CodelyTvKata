@@ -3,6 +3,7 @@ package tv.codely.kata.gildedrose;
 import org.junit.jupiter.api.Test;
 import tv.codely.kata.gildedrose.application.GildedRose;
 import tv.codely.kata.gildedrose.domain.Item;
+import tv.codely.kata.gildedrose.domain.ItemFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +17,8 @@ public class GildedRoseShould {
 
     @Test
     public void testThatSellInValueIsDecreased() {
-        Item whateverItem = new Item("whatever", 10, 0);
+        ItemFactory itemFactory = new ItemFactory();
+        Item whateverItem = itemFactory.createItem("whatever", 10, 0);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(whateverItem));
@@ -26,7 +28,8 @@ public class GildedRoseShould {
 
     @Test
     public void testThatQualityValueIsDecreased() {
-        Item whateverItem = new Item("whatever", 1, 10);
+        ItemFactory itemFactory = new ItemFactory();
+        Item whateverItem = itemFactory.createItem("whatever", 1, 10);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(whateverItem));
@@ -36,7 +39,8 @@ public class GildedRoseShould {
 
     @Test
     public void testThatQualityDecreasesTwiceAsMuchWhenSellByIsPassed() {
-        Item whateverItem = new Item("whatever", 0, 10);
+        ItemFactory itemFactory = new ItemFactory();
+        Item whateverItem = itemFactory.createItem("whatever", 0, 10);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(whateverItem));
@@ -46,7 +50,8 @@ public class GildedRoseShould {
 
     @Test
     public void testThatQualityIsNeverNegative() {
-        Item whateverItem = new Item("whatever", 0, 0);
+        ItemFactory itemFactory = new ItemFactory();
+        Item whateverItem = itemFactory.createItem("whatever", 0, 0);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(whateverItem));
@@ -56,7 +61,8 @@ public class GildedRoseShould {
 
     @Test
     public void testAgedBrieIncreasesQualityWithAge() {
-        Item agedBrie = new Item("Aged Brie", 5, 1);
+        ItemFactory itemFactory = new ItemFactory();
+        Item agedBrie = itemFactory.createItem("Aged Brie", 5, 1);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(agedBrie));
@@ -66,7 +72,8 @@ public class GildedRoseShould {
 
     @Test
     public void testQualityNeverIncreasesPastFifty() {
-        Item agedBrie = new Item("Aged Brie", 5, 50);
+        ItemFactory itemFactory = new ItemFactory();
+        Item agedBrie = itemFactory.createItem("Aged Brie", 5, 50);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(agedBrie));
@@ -76,7 +83,8 @@ public class GildedRoseShould {
 
     @Test
     public void testSulfurasNeverChanges() {
-        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 25);
+        ItemFactory itemFactory = new ItemFactory();
+        Item sulfuras = itemFactory.createItem("Sulfuras, Hand of Ragnaros", 0, 25);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(sulfuras));
@@ -87,7 +95,8 @@ public class GildedRoseShould {
 
     @Test
     public void testBackstagePassIncreasesQualityByOneIfSellByGreaterThenTen() {
-        Item backstagePasses = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 20);
+        ItemFactory itemFactory = new ItemFactory();
+        Item backstagePasses = itemFactory.createItem("Backstage passes to a TAFKAL80ETC concert", 11, 20);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(backstagePasses));
@@ -97,7 +106,8 @@ public class GildedRoseShould {
 
     @Test
     public void testBackstagePassIncreasesQualityByTwoIfSellBySmallerThanTen() {
-        Item backstagePasses = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);
+        ItemFactory itemFactory = new ItemFactory();
+        Item backstagePasses = itemFactory.createItem("Backstage passes to a TAFKAL80ETC concert", 6, 20);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(backstagePasses));
@@ -107,7 +117,8 @@ public class GildedRoseShould {
 
     @Test
     public void testBackstagePassIncreasesQualityByThreeIfSellBySmallerThanFive() {
-        Item backstagePasses = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20);
+        ItemFactory itemFactory = new ItemFactory();
+        Item backstagePasses = itemFactory.createItem("Backstage passes to a TAFKAL80ETC concert", 5, 20);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(backstagePasses));
@@ -117,7 +128,8 @@ public class GildedRoseShould {
 
     @Test
     public void testBackstagePassLosesValueAfterSellByPasses() {
-        Item backstagePasses = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20);
+        ItemFactory itemFactory = new ItemFactory();
+        Item backstagePasses = itemFactory.createItem("Backstage passes to a TAFKAL80ETC concert", 0, 20);
 
         GildedRose gildedRose = new GildedRose();
         gildedRose.updateQuality(arrayWith(backstagePasses));

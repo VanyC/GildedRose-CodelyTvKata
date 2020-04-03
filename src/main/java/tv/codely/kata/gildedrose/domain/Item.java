@@ -2,11 +2,7 @@ package tv.codely.kata.gildedrose.domain;
 
 import java.util.function.BinaryOperator;
 
-public class Item {
-
-    public static final String AGED_BRIE = "Aged Brie";
-    public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+abstract public class Item {
 
     public static final int MAX_QUALITY_VALUE = 50;
     public static final int MIN_QUALITY_VALUE = 0;
@@ -31,97 +27,40 @@ public class Item {
         this.quality = quality;
     }
 
-    public void update() {
-        switch(this.name) {
-            case SULFURAS:
-                break;
-            case BACKSTAGE_PASSES:
-                increaseBackstagePassesQuality();
+    abstract public void update();
 
-                decreaseSellIn();
-
-                if (isSellByDateHasPassed(this)) {
-                    this.quality = decreaser.apply(this.quality, this.quality);
-                }
-
-                break;
-            case AGED_BRIE:
-                increaseQuality();
-
-                decreaseSellIn();
-
-                if (isSellByDateHasPassed(this)) {
-                    increaseQuality();
-                }
-
-                break;
-            default:
-                decreaseQuality();
-
-                decreaseSellIn();
-
-                if (isSellByDateHasPassed(this)) {
-                    decreaseQuality();
-                }
-
-                break;
-        }
-    }
-
-    private void increaseBackstagePassesQuality() {
-        if (isNotHighestQuality(this)) {
-            this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
-
-            if (isConcertApproaching(this)) {
-                increaseQuality();
-            }
-
-            if (isConcertAlreadyHere(this)) {
-                increaseQuality();
-            }
-        }
-    }
-
-    private void decreaseSellIn() {
+    protected void decreaseSellIn() {
         this.sellIn = decreaser.apply(this.sellIn, SELLIN_QUANTITY_TO_DECREASE);
     }
 
-    private void decreaseQuality() {
+    protected void decreaseQuality() {
         if (isNotWorstQuality(this)) {
             this.quality = decreaser.apply(this.quality, QUALITY_QUANTITY_TO_DECREASE);
         }
     }
 
-    private void increaseQuality() {
+    protected void increaseQuality() {
         if (isNotHighestQuality(this)) {
             this.quality = increaser.apply(this.quality, QUALITY_QUANTITY_TO_INCREASE);
         }
     }
 
-    private boolean isNotWorstQuality(Item item) {
+    protected boolean isNotWorstQuality(Item item) {
         return item.quality > MIN_QUALITY_VALUE;
     }
 
-    private boolean isSellByDateHasPassed(Item item) {
+    protected boolean isSellByDateHasPassed(Item item) {
         return item.sellIn < MIN_SELLIN_DAYS;
     }
 
-    private boolean isNotHighestQuality(Item item) {
+    protected boolean isNotHighestQuality(Item item) {
         return item.quality < MAX_QUALITY_VALUE;
     }
 
-    private boolean isConcertAlreadyHere(Item item) {
-        return item.sellIn < DAYS_TO_FEW_DAYS_LEFT_TO_CONCERT;
-    }
-
-    private boolean isConcertApproaching(Item item) {
-        return item.sellIn < DAYS_TO_CONCERT_IS_APPROACHING;
-    }
-
-    private final BinaryOperator<Integer> decreaser = (itemToDecrease, quantityToDecrease)
+    protected final BinaryOperator<Integer> decreaser = (itemToDecrease, quantityToDecrease)
             -> itemToDecrease - quantityToDecrease;
 
-    private final BinaryOperator<Integer> increaser = (itemToIncrease, quantityToIncrease)
+    protected final BinaryOperator<Integer> increaser = (itemToIncrease, quantityToIncrease)
             -> itemToIncrease + quantityToIncrease;
 
     @Override
