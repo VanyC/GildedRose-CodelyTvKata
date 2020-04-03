@@ -9,6 +9,10 @@ public class ItemQuality {
     private Integer quality;
 
     public ItemQuality(Integer quality) {
+        if(quality > MAX_VALUE || quality < MIN_VALUE) {
+            throw new ItemQualityOutOfRangeException("Quality is out of range");
+        }
+
         this.quality = quality;
     }
 
@@ -17,14 +21,14 @@ public class ItemQuality {
     }
 
     public ItemQuality decrease() {
-        if (isNotWorstQuality()) {
+        if (!isOutOfRangeDown()) {
             return new ItemQuality(quality - QUANTITY_TO_MODIFY);
         }
         return this;
     }
 
     public ItemQuality increase() {
-        if (isNotHighestQuality()) {
+        if (!isOutOfRangeAbove()) {
             return new ItemQuality(quality + QUANTITY_TO_MODIFY);
         }
         return this;
@@ -34,12 +38,12 @@ public class ItemQuality {
         return new ItemQuality(MIN_VALUE);
     }
 
-    private boolean isNotHighestQuality() {
-        return quality < MAX_VALUE;
+    private boolean isOutOfRangeAbove() {
+        return quality >= MAX_VALUE;
     }
 
-    private boolean isNotWorstQuality() {
-        return quality > MIN_VALUE;
+    private boolean isOutOfRangeDown() {
+        return quality <= MIN_VALUE;
     }
 
     @Override
